@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { ResponseModel } from '../Responsemodel';
+import { TaxModel } from './TaxModel';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,52 @@ export class TaxService {
       })
     return result;
   };
+
+  CreateTaxAsync = async(
+    data : TaxModel
+  ) : Promise<ResponseModel> => {
+    let result : ResponseModel = {
+      error: '',
+      data: undefined,
+      message: '',
+      errorCode: ''
+    }
+
+    await axios
+    .post(`${this.API_URL}tax`,data)
+    .then((response) => {
+      result.data = response.data; 
+    } )
+    .catch((error) => {
+      this.handleError(error, result);
+      alert(JSON.stringify(error));
+    })
+
+    return result;
+  }
+
+  UpdateTaxAsync = async(
+    data : TaxModel,
+  ) : Promise<ResponseModel> => {
+    let result : ResponseModel = {
+      error: '',
+      data: undefined,
+      message: '',
+      errorCode: ''
+    }
+
+    await axios
+    .put(`${this.API_URL}tax/${data.id}`,data)
+    .then((response) => {
+      result.data = response.data; 
+    } )
+    .catch((error) => {
+      this.handleError(error, result);
+      alert(JSON.stringify(error));
+    })
+
+    return result;
+  }
 
   GetTaxByIdAsync = async (id : number
   ): Promise<ResponseModel> => {

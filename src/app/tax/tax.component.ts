@@ -3,45 +3,78 @@ import { TaxService } from './tax.service';
 import { ResponseModel } from '../Responsemodel';
 import { CommonModule, NumberSymbol } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { TaxModel } from './TaxModel';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tax',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './tax.component.html',
   styleUrl: './tax.component.css'
 })
 export class TaxComponent {
 
-  constructor(private taxService : TaxService, private route : ActivatedRoute){}
-
-  id : number = 0;
-
-  ngOnInit() : void {
-    this.id = Number(this.route.snapshot.params['id'])
-    console.log(this.id)
-    if(!Number.isNaN(this.id)){
-      this.fetchDataById(this.id);
-    
-    }
-    
+  initialTaxData: TaxModel = {
+    id: 0,
+    stateName: '',
+    sgst: 0,
+    cgst: 0,
+    totalTax: ''
   }
 
-  result? : ResponseModel;
+  taxInfo?: TaxModel;
+  constructor(private taxService: TaxService, private route: ActivatedRoute) { }
 
-  name? : string;
-  async  fetchData() {
-    this.result = await this.taxService.GetTaxAsync() 
+
+
+  ngOnInit(): void {
+    this.initialTaxData.id = Number(this.route.snapshot.params['id'])
+    console.log(this.initialTaxData.id)
+    if (0 !== this.initialTaxData.id && !Number.isNaN(this.initialTaxData.id)) {
+      this.fetchDataById(this.initialTaxData.id);
+    }
+
+  }
+
+  result?: ResponseModel;
+
+  name?: string;
+  async fetchData() {
+    this.result = await this.taxService.GetTaxAsync()
+    // console.log(this.result);
+    this.taxInfo = this.result.data;
+    console.log(this.taxInfo)
+  }
+
+  async fetchDataById(id: number) {
+    this.result = await this.taxService.GetTaxByIdAsync(id);
+    this.name = this.result.data.stateName;
+    this.taxInfo = this.result.data;
+    // console.log(this.taxInfo)
+    this.initialTaxData = this.result.data;
+    console.log(this.initialTaxData)
+    // console.log("name =>",this.name)
+    // console.log(this.result)
+  }
+
+  res?: ResponseModel
+  async handleSubmit() {
+    console.log(this.initialTaxData.id)
+    if(this.initialTaxData.id == 0){
+      console.log("Add")
+      this.taxService
+      .CreateTaxAsync(this.initialTaxData)
+      ;
+    }else{
+      console.log("Update")
+      this.taxService
+      .UpdateTaxAsync(this.initialTaxData)
+      ;
+    }
     console.log(this.result);
   }
-  
-  async fetchDataById(id : number) {
-     this.result = await this.taxService.GetTaxByIdAsync(this.id);
-    this.name = this.result.data.stateName;
-    console.log("name =>",this.name)
-    console.log(this.result)
-  }
-  
+
 }
- 
+
 

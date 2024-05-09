@@ -1,5 +1,23 @@
 <p>tax works!</p>
-<h1 *ngIf="name">{{name}}</h1>
+<section>
+    <div>
+        <label for="stateName">State Name : </label>
+        <input type="text" id="stateName" [(ngModel)]="initialTaxData.stateName">
+    </div>
+    <div>
+        <label for="sgst">SGST</label>
+        <input type="text" id="sgst" [(ngModel)]="initialTaxData.sgst">
+    </div>
+    <div>
+        <label for="cgst">CGST</label>
+        <input type="text" id="cgst" [(ngModel)]="initialTaxData.cgst">
+    </div>
+    <div>
+        <label for="totalTax">Total Tax</label>
+        <input type="text" id="totalTax" [(ngModel)]="initialTaxData.totalTax">
+    </div>
+    <button (click)="handleSubmit()">Submit</button>
+</section>
 <button (click)="fetchData()">
     Get Data
 </button>

@@ -1,6 +1,7 @@
-interface TaxModel{
+export interface TaxModel{
     id : number,
     stateName : string,
     sgst : number,
-    cgst : number,  
+    cgst : number,
+    totalTax?: string  
 }
