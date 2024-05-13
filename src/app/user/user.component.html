@@ -1,3 +1,29 @@
 <p>tax works!</p>
 
 
+<section>
+    <div>
+        <label for="firstName">First Name : </label>
+        <input type="text" id="firstName" [(ngModel)]="initialUserData.firstName">
+    </div>
+    <div>
+        <label for="lastName">last Name</label>
+        <input type="text" id="lastName" [(ngModel)]="initialUserData.lastName">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="text" id="email" [(ngModel)]="initialUserData.email">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="text" id="password" [(ngModel)]="initialUserData.password">
+    </div>
+    <div>
+        <label for="contactNumber">Contact Number</label>
+        <input type="text" id="contactNumber" [(ngModel)]="initialUserData.contactNumber">
+    </div>
+    <button (click)="handelSubmit()">Submit</button>
+</section>
+<button (click)="fetchData()">
+    Get user Data
+</button>

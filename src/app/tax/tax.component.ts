@@ -44,7 +44,7 @@ export class TaxComponent {
   name?: string;
   async fetchData() {
     this.result = await this.taxService.GetTaxAsync()
-    // console.log(this.result);
+     console.log(this.result);
     this.taxInfo = this.result.data;
     console.log(this.taxInfo)
   }
