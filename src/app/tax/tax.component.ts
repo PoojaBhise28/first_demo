@@ -17,6 +17,7 @@ export class TaxComponent {
 
   initialTaxData: TaxModel = {
     id: 0,
+    
     stateName: '',
     sgst: 0,
     cgst: 0,
@@ -24,6 +25,7 @@ export class TaxComponent {
   }
 
   taxInfo?: TaxModel;
+
   constructor(private taxService: TaxService, private route: ActivatedRoute) { }
 
 
@@ -59,18 +61,17 @@ export class TaxComponent {
   }
 
   res?: ResponseModel
+
   async handleSubmit() {
     console.log(this.initialTaxData.id)
     if(this.initialTaxData.id == 0){
       console.log("Add")
       this.taxService
-      .CreateTaxAsync(this.initialTaxData)
-      ;
+      .CreateTaxAsync(this.initialTaxData);
     }else{
       console.log("Update")
       this.taxService
-      .UpdateTaxAsync(this.initialTaxData)
-      ;
+      .UpdateTaxAsync(this.initialTaxData);
     }
     console.log(this.result);
   }
