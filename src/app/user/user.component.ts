@@ -36,11 +36,22 @@ export class UserComponent {
 
   ngOnInit(): void {
      this.initialUserData.id = Number(this.route.snapshot.params['id'])
-     console.log(this.initialUserData.id)
-     if(0 ! == this.initialUserData.id && !Number.isNaN(this.initialUserData.id)){
+     console.log(this.initialUserData.id);
+     if(0 !== this.initialUserData.id && !Number.isNaN(this.initialUserData.id)){
       this.fetchDataById(this.initialUserData.id);
          }
   }
+
+
+//running
+  // ngOnInit(): void {
+  //   this.initialUserData.id = Number(this.route.snapshot.params['id'])
+  //   console.log(this.initialUserData.id);
+  //   if (0 !== this.initialUserData.id && !Number.isNaN(this.initialUserData.id)) {
+  //     this.fetchDataById(this.initialUserData.id);
+  //   }
+
+  // }
 
 
   async fetchDataById (id:number){
