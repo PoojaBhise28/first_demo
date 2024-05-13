@@ -64,7 +64,7 @@ export class TaxComponent {
 
   async handleSubmit() {
     console.log(this.initialTaxData.id)
-    if(this.initialTaxData.id == 0){
+    if(!this.initialTaxData.id ){
       console.log("Add")
       this.taxService
       .CreateTaxAsync(this.initialTaxData);
